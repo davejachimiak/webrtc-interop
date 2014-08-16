@@ -8,10 +8,11 @@
     beforeEach(function() {
       return this.webRTCInterop = require('../webrtc-interop');
     });
-    return describe('w3c standard names are present', function() {
+    describe('w3c standard names are present', function() {
       afterEach(function() {
-        global.RTCPeerConnection = void 0;
-        return global.RTCSessionDescription = void 0;
+        delete global.RTCPeerConnection;
+        delete global.RTCSessionDescription;
+        return delete global.RTCIceCandidate;
       });
       it('leaves the peer connection name the same', function() {
         var rtcPeerConnection;
@@ -30,6 +31,16 @@
         global.RTCIceCandidate = rtcIceCandidate = new Object;
         this.webRTCInterop.infectGlobal();
         return expect(RTCIceCandidate).to.eq(rtcIceCandidate);
+      });
+    });
+    return describe('w3c standard names are not present', function() {
+      return describe('chrome names are present', function() {
+        return it('sets chrome peer connection object to w3c name', function() {
+          var webkitRtcPeerConnection;
+          global.webkitRTCPeerConnection = webkitRtcPeerConnection = new Object;
+          this.webRTCInterop.infectGlobal();
+          return expect(RTCPeerConnection).to.eq(webkitRtcPeerConnection);
+        });
       });
     });
   });

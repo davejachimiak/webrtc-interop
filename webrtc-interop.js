@@ -5,7 +5,10 @@
   WebRTCInterop = (function() {
     function WebRTCInterop() {}
 
-    WebRTCInterop.infectGlobal = function() {};
+    WebRTCInterop.infectGlobal = function() {
+      var _ref;
+      return global.RTCPeerConnection = (_ref = global.RTCPeerConnection) != null ? _ref : global.webkitRTCPeerConnection;
+    };
 
     return WebRTCInterop;
 

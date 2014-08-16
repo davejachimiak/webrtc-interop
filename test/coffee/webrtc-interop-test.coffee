@@ -6,8 +6,9 @@ describe 'WebRTC interopability', ->
 
   describe 'w3c standard names are present', ->
     afterEach ->
-      global.RTCPeerConnection = undefined
-      global.RTCSessionDescription = undefined
+      delete global.RTCPeerConnection
+      delete global.RTCSessionDescription
+      delete global.RTCIceCandidate
 
     it 'leaves the peer connection name the same', ->
       global.RTCPeerConnection = rtcPeerConnection = new Object
@@ -29,3 +30,12 @@ describe 'WebRTC interopability', ->
       @webRTCInterop.infectGlobal()
 
       expect(RTCIceCandidate).to.eq rtcIceCandidate
+
+  describe 'w3c standard names are not present', ->
+    describe 'chrome names are present', ->
+      it 'sets chrome peer connection object to w3c name', ->
+        global.webkitRTCPeerConnection = webkitRtcPeerConnection = new Object
+
+        @webRTCInterop.infectGlobal()
+
+        expect(RTCPeerConnection).to.eq webkitRtcPeerConnection
