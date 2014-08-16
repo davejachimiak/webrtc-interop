@@ -1,0 +1,20 @@
+{
+  "name": "webrtc-interop",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main":"index.js",
+  "devDependencies": {
+    "coffee-script":"1.7.1",
+    "browserify":"5.10.0",
+    "chai": "1.9.1",
+    "mocha":"1.18.2",
+    "sinon":"1.9.1",
+    "sinon-chai":"2.5.0",
+    "uglify-js":"2.4.13"
+  },
+  "scripts": {
+    "build":"coffee -o . -c coffee && browserify bundle.js -o webrtc-interop.bundle.js && uglifyjs webrtc-interop.bundle.js -o webrtc-interop.bundle.min.js",
+    "build-test":"coffee -o ./test -c test/coffee",
+    "test":"npm run build && npm run build-test && mocha -R spec"
+  }
+}
