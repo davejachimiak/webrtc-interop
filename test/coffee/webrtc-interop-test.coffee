@@ -6,7 +6,7 @@ describe 'WebRTC interopability', ->
 
   describe 'w3c standard names are present', ->
     it 'leaves the peer connection name the same', ->
-      global.RTCPeerConnection = rtcPeerConnection = 'w3c peer connection'
+      global.RTCPeerConnection = rtcPeerConnection = new Object
 
       @webRTCInterop.infectGlobal()
 
@@ -35,7 +35,7 @@ describe 'WebRTC interopability', ->
   describe 'w3c standard names are not present', ->
     describe 'chrome names are present', ->
       it 'sets chrome peer connection object to w3c name', ->
-        global.webkitRTCPeerConnection = webkitRTCPeerConnection = 'chrome rtc peer connection'
+        global.webkitRTCPeerConnection = webkitRTCPeerConnection = new Object
 
         @webRTCInterop.infectGlobal()
 
@@ -47,7 +47,7 @@ describe 'WebRTC interopability', ->
     describe 'chrome names are not present', ->
       describe 'mozilla names are present', ->
         it 'sets mozilla peer connection object to the w3c name', ->
-          global.mozRTCPeerConnection = mozRTCPeerConnection = 'moz rtc peer connection'
+          global.mozRTCPeerConnection = mozRTCPeerConnection = new Object
 
           @webRTCInterop.infectGlobal()
 
@@ -57,7 +57,7 @@ describe 'WebRTC interopability', ->
           delete global.RTCPeerConnection
 
         it 'sets the mozilla session description object to the w3c name', ->
-          global.mozRTCSessionDescription = mozRTCSessionDescription = 'moz rtc session description'
+          global.mozRTCSessionDescription = mozRTCSessionDescription = new Object
 
           @webRTCInterop.infectGlobal()
 

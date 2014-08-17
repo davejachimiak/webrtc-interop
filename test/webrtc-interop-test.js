@@ -11,7 +11,7 @@
     describe('w3c standard names are present', function() {
       it('leaves the peer connection name the same', function() {
         var rtcPeerConnection;
-        global.RTCPeerConnection = rtcPeerConnection = 'w3c peer connection';
+        global.RTCPeerConnection = rtcPeerConnection = new Object;
         this.webRTCInterop.infectGlobal();
         expect(RTCPeerConnection).to.eq(rtcPeerConnection);
         return delete global.RTCPeerConnection;
@@ -35,7 +35,7 @@
       describe('chrome names are present', function() {
         return it('sets chrome peer connection object to w3c name', function() {
           var webkitRTCPeerConnection;
-          global.webkitRTCPeerConnection = webkitRTCPeerConnection = 'chrome rtc peer connection';
+          global.webkitRTCPeerConnection = webkitRTCPeerConnection = new Object;
           this.webRTCInterop.infectGlobal();
           expect(RTCPeerConnection).to.eq(webkitRTCPeerConnection);
           delete global.webkitRTCPeerConnection;
@@ -46,7 +46,7 @@
         describe('mozilla names are present', function() {
           it('sets mozilla peer connection object to the w3c name', function() {
             var mozRTCPeerConnection;
-            global.mozRTCPeerConnection = mozRTCPeerConnection = 'moz rtc peer connection';
+            global.mozRTCPeerConnection = mozRTCPeerConnection = new Object;
             this.webRTCInterop.infectGlobal();
             expect(RTCPeerConnection).to.eq(mozRTCPeerConnection);
             delete global.mozRTCPeerConnection;
@@ -54,7 +54,7 @@
           });
           it('sets the mozilla session description object to the w3c name', function() {
             var mozRTCSessionDescription;
-            global.mozRTCSessionDescription = mozRTCSessionDescription = 'moz rtc session description';
+            global.mozRTCSessionDescription = mozRTCSessionDescription = new Object;
             this.webRTCInterop.infectGlobal();
             expect(RTCSessionDescription).to.eq(mozRTCSessionDescription);
             delete global.mozRTCSessionDescription;
