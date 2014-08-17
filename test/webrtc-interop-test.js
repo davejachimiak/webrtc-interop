@@ -43,7 +43,7 @@
         });
       });
       return describe('chrome names are not present', function() {
-        return describe('mozilla names are present', function() {
+        describe('mozilla names are present', function() {
           it('sets mozilla peer connection object to the w3c name', function() {
             var mozRTCPeerConnection;
             global.mozRTCPeerConnection = mozRTCPeerConnection = 'moz rtc peer connection';
@@ -53,11 +53,11 @@
             return delete global.RTCPeerConnection;
           });
           it('sets the mozilla session description object to the w3c name', function() {
-            var mozRtcSessionDescription;
-            global.mozRTCSessionDescription = mozRtcSessionDescription = 'moz rtc session description';
+            var mozRTCSessionDescription;
+            global.mozRTCSessionDescription = mozRTCSessionDescription = 'moz rtc session description';
             this.webRTCInterop.infectGlobal();
-            expect(RTCSessionDescription).to.eq(mozRtcSessionDescription);
-            delete global.mozRtcSessionDescription;
+            expect(RTCSessionDescription).to.eq(mozRTCSessionDescription);
+            delete global.mozRTCSessionDescription;
             return delete global.RTCSessionDescription;
           });
           return it('sets the mozilla session description object to the w3c name', function() {
@@ -67,6 +67,20 @@
             expect(RTCIceCandidate).to.eq(mozRtcIceCandidate);
             delete global.mozRTCIceCandidate;
             return delete global.RTCIceCandidate;
+          });
+        });
+        return describe('no names are present', function() {
+          beforeEach(function() {
+            return this.webRTCInterop.infectGlobal();
+          });
+          it('sets nothing on the w3c peer connection name', function() {
+            return expect(RTCPeerConnection).to.be.undefined;
+          });
+          it('sets nothing on the w3c session description name', function() {
+            return expect(RTCSessionDescription).to.be.undefined;
+          });
+          return it('sets nothing on the w3c ice candidate name', function() {
+            return expect(RTCIceCandidate).to.be.undefined;
           });
         });
       });

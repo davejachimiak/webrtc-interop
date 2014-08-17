@@ -57,13 +57,13 @@ describe 'WebRTC interopability', ->
           delete global.RTCPeerConnection
 
         it 'sets the mozilla session description object to the w3c name', ->
-          global.mozRTCSessionDescription = mozRtcSessionDescription = 'moz rtc session description'
+          global.mozRTCSessionDescription = mozRTCSessionDescription = 'moz rtc session description'
 
           @webRTCInterop.infectGlobal()
 
-          expect(RTCSessionDescription).to.eq mozRtcSessionDescription
+          expect(RTCSessionDescription).to.eq mozRTCSessionDescription
 
-          delete global.mozRtcSessionDescription
+          delete global.mozRTCSessionDescription
           delete global.RTCSessionDescription
 
         it 'sets the mozilla session description object to the w3c name', ->
@@ -75,3 +75,16 @@ describe 'WebRTC interopability', ->
 
           delete global.mozRTCIceCandidate
           delete global.RTCIceCandidate
+
+      describe 'no names are present', ->
+        beforeEach ->
+          @webRTCInterop.infectGlobal()
+
+        it 'sets nothing on the w3c peer connection name', ->
+          expect(RTCPeerConnection).to.be.undefined
+
+        it 'sets nothing on the w3c session description name', ->
+          expect(RTCSessionDescription).to.be.undefined
+
+        it 'sets nothing on the w3c ice candidate name', ->
+          expect(RTCIceCandidate).to.be.undefined
