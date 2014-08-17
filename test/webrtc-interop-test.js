@@ -9,37 +9,57 @@
       return this.webRTCInterop = require('../webrtc-interop');
     });
     describe('w3c standard names are present', function() {
-      afterEach(function() {
-        delete global.RTCPeerConnection;
-        delete global.RTCSessionDescription;
-        return delete global.RTCIceCandidate;
-      });
       it('leaves the peer connection name the same', function() {
         var rtcPeerConnection;
-        global.RTCPeerConnection = rtcPeerConnection = new Object;
+        global.RTCPeerConnection = rtcPeerConnection = 'w3c peer connection';
         this.webRTCInterop.infectGlobal();
-        return expect(RTCPeerConnection).to.eq(rtcPeerConnection);
+        expect(RTCPeerConnection).to.eq(rtcPeerConnection);
+        return delete global.RTCPeerConnection;
       });
       it('leaves the session description name the same', function() {
         var rtcSessionDescription;
         global.RTCSessionDescription = rtcSessionDescription = new Object;
         this.webRTCInterop.infectGlobal();
-        return expect(RTCSessionDescription).to.eq(rtcSessionDescription);
+        expect(RTCSessionDescription).to.eq(rtcSessionDescription);
+        return delete global.RTCSessionDescription;
       });
       return it('leaves the session description name the same', function() {
         var rtcIceCandidate;
         global.RTCIceCandidate = rtcIceCandidate = new Object;
         this.webRTCInterop.infectGlobal();
-        return expect(RTCIceCandidate).to.eq(rtcIceCandidate);
+        expect(RTCIceCandidate).to.eq(rtcIceCandidate);
+        return delete global.RTCIceCandidate;
       });
     });
     return describe('w3c standard names are not present', function() {
-      return describe('chrome names are present', function() {
+      describe('chrome names are present', function() {
         return it('sets chrome peer connection object to w3c name', function() {
-          var webkitRtcPeerConnection;
-          global.webkitRTCPeerConnection = webkitRtcPeerConnection = new Object;
+          var webkitRTCPeerConnection;
+          global.webkitRTCPeerConnection = webkitRTCPeerConnection = 'chrome rtc peer connection';
           this.webRTCInterop.infectGlobal();
-          return expect(RTCPeerConnection).to.eq(webkitRtcPeerConnection);
+          expect(RTCPeerConnection).to.eq(webkitRTCPeerConnection);
+          delete global.webkitRTCPeerConnection;
+          return delete global.RTCPeerConnection;
+        });
+      });
+      return describe('chrome names are not present', function() {
+        return describe('mozilla names are present', function() {
+          it('sets mozilla peer connection object to the w3c name', function() {
+            var mozRTCPeerConnection;
+            global.mozRTCPeerConnection = mozRTCPeerConnection = 'moz rtc peer connection';
+            this.webRTCInterop.infectGlobal();
+            expect(RTCPeerConnection).to.eq(mozRTCPeerConnection);
+            delete global.mozRTCPeerConnection;
+            return delete global.RTCPeerConnection;
+          });
+          return it('sets the mozilla session description object to the w3c name', function() {
+            var mozRtcSessionDescription;
+            global.mozRTCSessionDescription = mozRtcSessionDescription = 'moz rtc session description';
+            this.webRTCInterop.infectGlobal();
+            expect(RTCSessionDescription).to.eq(mozRtcSessionDescription);
+            delete global.mozRtcSessionDescription;
+            return delete global.RTCSessionDescription;
+          });
         });
       });
     });
