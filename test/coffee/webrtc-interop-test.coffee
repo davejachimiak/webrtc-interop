@@ -65,3 +65,13 @@ describe 'WebRTC interopability', ->
 
           delete global.mozRtcSessionDescription
           delete global.RTCSessionDescription
+
+        it 'sets the mozilla session description object to the w3c name', ->
+          global.mozRTCIceCandidate = mozRtcIceCandidate = new Object
+
+          @webRTCInterop.infectGlobal()
+
+          expect(RTCIceCandidate).to.eq mozRtcIceCandidate
+
+          delete global.mozRTCIceCandidate
+          delete global.RTCIceCandidate

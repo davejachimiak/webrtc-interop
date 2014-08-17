@@ -16,9 +16,10 @@ module.exports = require('./webrtc-interop.js')
     function WebRTCInterop() {}
 
     WebRTCInterop.infectGlobal = function() {
-      var _ref, _ref1, _ref2;
+      var _ref, _ref1, _ref2, _ref3;
       global.RTCPeerConnection = (_ref = (_ref1 = global.RTCPeerConnection) != null ? _ref1 : global.webkitRTCPeerConnection) != null ? _ref : global.mozRTCPeerConnection;
-      return global.RTCSessionDescription = (_ref2 = global.RTCSessionDescription) != null ? _ref2 : global.mozRTCSessionDescription;
+      global.RTCSessionDescription = (_ref2 = global.RTCSessionDescription) != null ? _ref2 : global.mozRTCSessionDescription;
+      return global.RTCIceCandidate = (_ref3 = global.RTCIceCandidate) != null ? _ref3 : global.mozRTCIceCandidate;
     };
 
     return WebRTCInterop;

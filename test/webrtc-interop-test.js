@@ -52,13 +52,21 @@
             delete global.mozRTCPeerConnection;
             return delete global.RTCPeerConnection;
           });
-          return it('sets the mozilla session description object to the w3c name', function() {
+          it('sets the mozilla session description object to the w3c name', function() {
             var mozRtcSessionDescription;
             global.mozRTCSessionDescription = mozRtcSessionDescription = 'moz rtc session description';
             this.webRTCInterop.infectGlobal();
             expect(RTCSessionDescription).to.eq(mozRtcSessionDescription);
             delete global.mozRtcSessionDescription;
             return delete global.RTCSessionDescription;
+          });
+          return it('sets the mozilla session description object to the w3c name', function() {
+            var mozRtcIceCandidate;
+            global.mozRTCIceCandidate = mozRtcIceCandidate = new Object;
+            this.webRTCInterop.infectGlobal();
+            expect(RTCIceCandidate).to.eq(mozRtcIceCandidate);
+            delete global.mozRTCIceCandidate;
+            return delete global.RTCIceCandidate;
           });
         });
       });
