@@ -46,7 +46,8 @@ Then add it to the source of a script tag in your html:
 </head>
 ```
 
-An object called `WebRTCInterop` will be injected into the global namespace. Call `.infect` on it.
+The global namespace will be infected with an object called `WebRTCInterop`.
+Call `.infect` on it.
 
 ```js
 WebRTCInterop.infect()
